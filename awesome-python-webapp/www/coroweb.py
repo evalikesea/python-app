@@ -79,6 +79,7 @@ class RequestHandler(object):
         self._has_request_arg = has_request_arg(fn)
         self._has_var_kw_arg = has_var_kw_args(fn)
         self._has_named_kw_args = has_named_kw_args(fn)
+        self._named_kw_args = get_named_kw_args(fn)
         self._required_kw_args = get_required_kw_args(fn)
 
     async def __call__(self, request):
@@ -108,10 +109,10 @@ class RequestHandler(object):
         if kw is None:
             kw = dict(**request.match_info)
         else:
-            if not self._has_var_kw_arg and self._has_named_kw_args:
+            if not self._has_var_kw_arg and self._named_kw_args:
                 # remove all unamed kw:
                 copy = dict()
-                for name in self._has_named_kw_args:
+                for name in self._named_kw_args:
                     if name in kw:
                         copy[name] = kw[name]
                 kw = copy
