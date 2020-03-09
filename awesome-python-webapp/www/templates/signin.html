@@ -47,15 +47,15 @@
             <form id="vm" @submit="submit" class="uk-panel uk-form">
                 <div class="uk-alert-danger uk-hidden" uk-alert></div>
                 <div class="uk-margin">
-                    <div class="uk-form-controls uk-width-1-1">
-                        <i style="float:left;margin-bottom:10px;" uk-icon="mail"></i>
-                        <input v-model="email" name="email" type="text" placeholder="电子邮件" maxlength="50" class="uk-width-1-1 uk-form-large">
+                    <div class="uk-inline  uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                        <input v-model="email" name="email" type="text" placeholder="电子邮件" maxlength="50" class="uk-input " >
                     </div>
                 </div>
                 <div class="uk-margin">
-                    <div class="uk-form-controls uk-width-1-1">
-                        <i style="float:left;margin-bottom:10px;" uk-icon="lock"></i>
-                        <input v-model="passwd" name="passwd" type="password" placeholder="密码" maxlength="50" class="uk-width-1-1 uk-form-large">
+                    <div class="uk-inline  uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                        <input v-model="passwd" name="passwd" type="password" placeholder="密码" maxlength="50" class="uk-input uk-width-1-1 " >
                     </div>
                 </div>
                 <div class="uk-margin">

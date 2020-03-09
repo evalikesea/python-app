@@ -23,7 +23,6 @@
                 submit: function (event) {
                     event.preventDefault();
                     var $form = $('#vm');
-                    console.log($form)
                     if (! this.name.trim()) {
                         return $form.showFormError('请输入名字');
                     }
