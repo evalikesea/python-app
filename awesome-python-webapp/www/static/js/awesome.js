@@ -256,23 +256,23 @@ $(function () {
                     $submit = $form && $form.find('button[type=submit]'),
                     $buttons = $form && $form.find('button');
                     $i = $submit && $submit.find('i'),
-                    iconClass = $i && $i.attr('class');
+                    iconClass = $i && $i.attr('uk-icon');
                 if (! $form.is('form')) {
                     console.error('Cannot call showFormLoading() on non-form object.');
                     return;
                 }
-                if (!iconClass || iconClass.indexOf('uk-icon') < 0) {
-                    console.warn('Icon <i class="uk-icon-*>" not found.');
-                    return;
-                }
-                if (isLoading) {
-                    $buttons.attr('disabled', 'disabled');
-                    $i && $i.addClass('uk-icon-spinner').addClass('uk-icon-spin');
-                }
-                else {
-                    $buttons.removeAttr('disabled');
-                    $i && $i.removeClass('uk-icon-spinner').removeClass('uk-icon-spin');
-                }
+//                if (!iconClass || !iconClass.val()) {
+//                    console.warn('Icon <i uk-icon="*"> not found.');
+//                    return;
+//                }
+//                if (isLoading) {
+//                    $buttons.attr('disabled', 'disabled');
+//                    $i && $i.addClass('uk-icon-spinner').addClass('uk-icon-spin');
+//                }
+//                else {
+//                    $buttons.removeAttr('disabled');
+//                    $i && $i.removeClass('uk-icon-spinner').removeClass('uk-icon-spin');
+//                }
             });
         },
         postJSON: function (url, data, callback) {
@@ -355,13 +355,14 @@ if (typeof(Vue)!=='undefined') {
         return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes();
     });
     Vue.component('pagination', {
-        template: '<ul class="uk-pagination">' +
-                '<li v-if="! has_previous" class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>' +
-                '<li v-if="has_previous"><a v-attr="onclick:\'gotoPage(\' + (page_index-1) + \')\'" href="#0"><i class="uk-icon-angle-double-left"></i></a></li>' +
-                '<li class="uk-active"><span v-text="page_index"></span></li>' +
-                '<li v-if="! has_next" class="uk-disabled"><span><i class="uk-icon-angle-double-right"></i></span></li>' +
-                '<li v-if="has_next"><a v-attr="onclick:\'gotoPage(\' + (page_index+1) + \')\'" href="#0"><i class="uk-icon-angle-double-right"></i></a></li>' +
-            '</ul>'
+        props:['page'],
+        template:  '<ul class="uk-pagination">' +
+                        '<li v-if="!page.has_previous" class="uk-disabled"><span><i uk-icon="chevron-double-left"></i></span></li>' +
+                        '<li v-if="page.has_previous"><a @click="\'gotoPage(\' + (page.page_index-1) + \')\'" href="#0"><i uk-icon="chevron-double-left"></i></a></li>' +
+                        '<li class="uk-active"><span v-text="page.page_index"></span></li>' +
+                        '<li v-if="! page.has_next" class="uk-disabled"><span><i uk-icon="chevron-double-right"></i></span></li>' +
+                        '<li v-if="page.has_next"><a @click="\'gotoPage(\' + (page.page_index+1) + \')\'" href="#0"><i uk-icon="chevron-double-right"></i></a></li>' +
+                    '</ul>'
     });
 }
 

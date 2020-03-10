@@ -19,13 +19,13 @@ async def select(sql, args, size=None):
     logging.info('SQL: %s' % sql)
     global __pool
     async with __pool.get() as conn:
-        async with conn.cursor(aiomysql.DictCursor) as cur:
+            cur = await conn.cursor(aiomysql.DictCursor)
             await cur.execute(sql.replace('?','%s'), args or ())
             if size:
                 rs = await cur.fetchmany(size)
             else:
                 rs = await cur.fetchall()
-            cur.close()
+            await cur.close()
             logging.info('rows returned:%s' % len(rs))
             return rs
 async def execute(sql, args, autocommit=True):
@@ -36,7 +36,7 @@ async def execute(sql, args, autocommit=True):
         if not autocommit:
             await conn.begin()
         try:
-            async with conn.cursor(aiomysql.DictCursor) as cur:
+                cur = await conn.cursor()
                 await cur.execute(sql.replace('?', '%s'), args)
                 affected = cur.rowcount
                 await cur.close()

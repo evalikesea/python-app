@@ -31,7 +31,7 @@ $(function () {
 
 {% block content %}
 
-    <div class="uk-width-medium-3-4">
+    <div class="uk-width-3-4">
         <article class="uk-article">
             <h2>{{ blog.name }}</h2>
             <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}</p>
@@ -46,7 +46,7 @@ $(function () {
         <article class="uk-comment">
             <header class="uk-comment-header">
                 <img class="uk-comment-avatar uk-border-circle" width="50" height="50" src="{{ __user__.image }}">
-                <h4 class="uk-comment-title">{{ __user__.name }}</h4>
+                <h5 style="margin-top:10px;">{{ __user__.name }}</h5>
             </header>
             <div class="uk-comment-body">
                 <form id="form-comment" class="uk-form">
@@ -65,14 +65,13 @@ $(function () {
     {% endif %}
 
         <h3>最新评论</h3>
-
         <ul class="uk-comment-list">
             {% for comment in comments %}
-            <li>
+            <li >
                 <article class="uk-comment">
                     <header class="uk-comment-header">
-                        <img class="uk-comment-avatar uk-border-circle" width="50" height="50" src="{{ comment.user_image }}">
-                        <h4 class="uk-comment-title">{{ comment.user_name }} {% if comment.user_id==blog.user_id %}(作者){% endif %}</h4>
+                        <img class="uk-border-circle" width="50" height="50" src="{{ comment.user_image }}">
+                        <h4 class="uk-comment-title" style="margin-top:10px;">{{ comment.user_name }} {% if comment.user_id==blog.user_id %}(作者){% endif %}</h4>
                         <p class="uk-comment-meta">{{ comment.created_at|datetime }}</p>
                     </header>
                     <div class="uk-comment-body">
@@ -87,11 +86,11 @@ $(function () {
 
     </div>
 
-    <div class="uk-width-medium-1-4">
-        <div class="uk-panel uk-panel-box">
+    <div class="uk-width-1-4">
+        <div class="uk-panel">
             <div class="uk-text-center">
-                <img class="uk-border-circle" width="120" height="120" src="{{ blog.user_image }}">
-                <h3>{{ blog.user_name }}</h3>
+                <img class="uk-border-circle" width="80" height="80" src="{{ blog.user_image }}">
+                <h4 style="margin-top:20px;">{{ blog.user_name }}</h4>
             </div>
         </div>
         <div class="uk-panel uk-panel-header">
