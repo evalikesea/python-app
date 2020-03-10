@@ -12,3 +12,6 @@ a:hover, a:active {
     display: none;
     margin-bottom: 15px;
 }
+#vm th{
+    text-align:left;
+}

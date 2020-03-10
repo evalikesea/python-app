@@ -25,8 +25,9 @@ async def select(sql, args, size=None):
                 rs = await cur.fetchmany(size)
             else:
                 rs = await cur.fetchall()
-        logging.info('rows returned:%s' % len(rs))
-        return rs
+            cur.close()
+            logging.info('rows returned:%s' % len(rs))
+            return rs
 async def execute(sql, args, autocommit=True):
     logging.info('SQL: %s' % sql)
     async with __pool.get() as conn:
@@ -38,8 +39,9 @@ async def execute(sql, args, autocommit=True):
             async with conn.cursor(aiomysql.DictCursor) as cur:
                 await cur.execute(sql.replace('?', '%s'), args)
                 affected = cur.rowcount
-            if not autocommit:
-                await conn.commit()
+                await cur.close()
+                if not autocommit:
+                    await conn.commit()
         except BaseException as e:
             if not autocommit:
                 await conn.rollback()
@@ -152,10 +154,10 @@ class Model(dict, metaclass= ModelMetaclass):
                 sql.append('?')
                 args.append(limit)
             elif isinstance(limit, tuple) and len(limit) == 2:
-                sql.append('?,?')
+                sql.append('?, ?')
                 args.extend(limit)
             else:
-                raise ValueError('Invalid limit value:%s' %str(limit))
+                raise ValueError('Invalid limit value:%s' % str(limit))
         rs = await select(' '.join(sql), args)
         return [cls(**r) for r in rs]
     @classmethod

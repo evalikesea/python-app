@@ -31,7 +31,7 @@ class Page(object):
         #日志数量不到一页
         if (item_count == 0) or (page_size > self.page_count):
             self.offset = 0
-            self.limit = 0
+            self.limit = item_count
             self.page_index = 1
         else:
             self.page_index = page_index
