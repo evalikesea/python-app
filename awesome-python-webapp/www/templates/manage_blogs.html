@@ -99,7 +99,7 @@ $(function() {
             </tbody>
         </table>
 
-        <pagination page="page"></pagination>
+        <page-pagination v-bind:has_next="page.has_next" v-bind:has_previous="page.has_previous" v-bind:page_index="page.page_index"></page-pagination>
     </div>
 
 {% endblock %}

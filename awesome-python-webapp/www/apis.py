@@ -28,10 +28,10 @@ class Page(object):
         self.item_count = item_count
         self.page_size = page_size
         self.page_count = item_count // page_size + (1 if item_count % page_size > 0 else 0)
-        #日志数量不到一页
-        if (item_count == 0) or (page_size > self.page_count):
+        #数量不到一页，或者检索到最后一页（返回第一页）
+        if (item_count == 0) or (page_index > self.page_count):
             self.offset = 0
-            self.limit = item_count
+            self.limit = 0
             self.page_index = 1
         else:
             self.page_index = page_index

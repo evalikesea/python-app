@@ -5,10 +5,10 @@
 {% block beforehead %}
 
 <script>
-
+var vm;
 function initVM(data) {
     $('#vm').show();
-    var vm = new Vue({
+    vm = new Vue({
         el: '#vm',
         data: {
             comments: data.comments,
@@ -88,9 +88,10 @@ $(function() {
                     <td>
                         <a href="#0" v-on:click="delete_comment(comment)" ><i uk-icon="trash"></i></a>
                     </td>
+
                 </tr>
             </tbody>
         </table>
-        <pagination page="page"></pagination>
+        <page-pagination v-bind:has_next="page.has_next" v-bind:has_previous="page.has_previous" v-bind:page_index="page.page_index"></page-pagination>
     </div>
 {% endblock %}

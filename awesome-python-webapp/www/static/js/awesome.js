@@ -116,8 +116,12 @@ function parseQueryString() {
 }
 
 function gotoPage(i) {
+    console.log("gotoPage");
+
+    console.log("i:" +i);
     var r = parseQueryString();
     r.page = i;
+    console.log($.param(r));
     location.assign('?' + $.param(r));
 }
 
@@ -354,14 +358,14 @@ if (typeof(Vue)!=='undefined') {
         }
         return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes();
     });
-    Vue.component('pagination', {
-        props:['page'],
+    Vue.component('page-pagination', {
+        props:['has_next','has_previous','page_index'],
         template:  '<ul class="uk-pagination">' +
-                        '<li v-if="!page.has_previous" class="uk-disabled"><span><i uk-icon="chevron-double-left"></i></span></li>' +
-                        '<li v-if="page.has_previous"><a @click="\'gotoPage(\' + (page.page_index-1) + \')\'" href="#0"><i uk-icon="chevron-double-left"></i></a></li>' +
-                        '<li class="uk-active"><span v-text="page.page_index"></span></li>' +
-                        '<li v-if="! page.has_next" class="uk-disabled"><span><i uk-icon="chevron-double-right"></i></span></li>' +
-                        '<li v-if="page.has_next"><a @click="\'gotoPage(\' + (page.page_index+1) + \')\'" href="#0"><i uk-icon="chevron-double-right"></i></a></li>' +
+                        '<li v-if="!has_previous" class="uk-disabled"><i uk-icon="chevron-double-left"></i></li>' +
+                        '<li v-if="has_previous"><a v-on:click="\'gotoPage(\' + (page_index-1) + \')\'" href="#0"><i uk-icon="chevron-double-left"></i></a></li>' +
+                        '<li class="uk-active"><span v-text="page_index"></span></li>' +
+                        '<li v-if="!has_next" class="uk-disabled"><i uk-icon="chevron-double-right"></i></li>' +
+                        '<li v-if="has_next"><a v-on:click="\'gotoPage(\' + (page_index+1) + \')\'" href="#0"><i uk-icon="chevron-double-right"></i></a></li>' +
                     '</ul>'
     });
 }
