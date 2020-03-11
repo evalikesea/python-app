@@ -5,14 +5,34 @@
 {% block beforehead %}
 
 <script>
-
+var vm;
+function initVM(data) {
+    $('#vm').show();
+    vm = new Vue({
+        el: '#vm',
+        data: {
+            blogs: data.blogs,
+            page: data.page
+        }
+    });
+}
+$(function() {
+    getJSON('/api/blogs', {
+        page: {{ page.page_index }}
+    }, function (err, data) {
+        if (err) {
+            return fatal(err);
+        }
+        initVM(data);
+    });
+});
 </script>
 
 {% endblock %}
 
 {% block content %}
 
-    <div class="uk-width-3-4">
+    <div id="vm" class="uk-width-3-4">
     {% for blog in blogs %}
         <article class="uk-article">
             <h2><a href="/blog/{{ blog.id }}">{{ blog.name }}</a> </h2>
@@ -22,6 +42,7 @@
         </article>
         <hr class="uk-article-divider">
     {% endfor %}
+        <page-pagination v-bind:has_next="page.has_next" v-bind:has_previous="page.has_previous" v-bind:page_index="page.page_index"></page-pagination>
     </div>
 
     <div class="uk-width-1-4">
