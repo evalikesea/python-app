@@ -87,40 +87,6 @@ class BilibiliLogin(object):
                     return left
         return left
 
-    # def get_track(self, gap):
-    #     """
-    #     获取移动轨迹
-    #     :param gap: 偏移量
-    #     :return: 移动轨迹
-    #     """
-    #     track = []
-    #     current = 0         #当前位移
-    #     mid = gap * 4 / 5   #前4/5段加速 后1/5段减速
-    #     t = 0.1             #时间间隔
-    #     v = 0               #初速度
-    #
-    #     while current < gap:
-    #         if current < mid:
-    #             a = 3       #加速度为+3
-    #         else:
-    #
-    #             a = -3      #加速度为-3
-    #         v0 = v
-    #         v = v0 + a * t
-    #         move = v0 * t + 1 / 2 * a * t * t
-    #         current += move #当前位移
-    #         track.append(round(move))
-    #     return track
-    #
-    # def drag_slider(self, slider, gap):
-    #     ActionChains(self.browser).click_and_hold(on_element=slider).perform()
-    #     ActionChains(self.browser).pause(0.2)
-    #     ActionChains(self.browser).move_by_offset(xoffset=gap-10, yoffset=0).perform()
-    #     ActionChains(self.browser).pause(0.6)
-    #     ActionChains(self.browser).move_by_offset(xoffset=10, yoffset=0).perform()
-    #     ActionChains(self.browser).pause(0.6)
-    #     ActionChains(self.browser).release().perform()
-
     def getRandomPauseSeconds(self):
         """
         :return:随机的拖动暂停时间
