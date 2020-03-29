@@ -6,7 +6,6 @@
 #@ Time      :   2020/3/27 3:07 下午
 #@ Desc      :   None
 '''
-
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
@@ -28,12 +27,13 @@ class BilibiliLogin(object):
         self.wait = WebDriverWait(self.browser, 50)
         self.username = username
         self.password = password
-        self.url = r'https://passport.bilibili.com/login'
+        self.login_url = r'https://passport.bilibili.com/login'
+
     # def __del__(self):
     #     self.browser.close()
 
     def open(self):
-        self.browser.get(self.url)
+        self.browser.get(self.login_url)
         username_input = self.wait.until(
             EC.presence_of_element_located((By.ID, 'login-username'))
         )
@@ -87,13 +87,13 @@ class BilibiliLogin(object):
                     return left
         return left
 
-    def getRandomPauseSeconds(self):
+    def get_random_seconds(self):
         """
         :return:随机的拖动暂停时间
         """
         return random.uniform(0.6, 0.9)
 
-    def simulateDragX(self, source, gap):
+    def drag_slider(self, source, gap):
         """
         模仿人的拖拽动作：快速沿着X轴拖动（存在误差），再暂停，然后修正误差
         防止被检测为机器人，出现“图片被怪物吃掉了”等验证失败的情况
@@ -111,7 +111,7 @@ class BilibiliLogin(object):
             sumOffsetx = random.randint(-15, 15)
             action_chains.move_by_offset(gap + sumOffsetx, 0)
             # 暂停一会
-            action_chains.pause(self.getRandomPauseSeconds())
+            action_chains.pause(self.get_random_seconds())
             # 修正误差，防止被检测为机器人，出现图片被怪物吃掉了等验证失败的情况
             action_chains.move_by_offset(-sumOffsetx, 0)
         elif dragCount == 3:
@@ -119,7 +119,7 @@ class BilibiliLogin(object):
             sumOffsetx = random.randint(-15, 15)
             action_chains.move_by_offset(gap + sumOffsetx, 0)
             # 暂停一会
-            action_chains.pause(self.getRandomPauseSeconds())
+            action_chains.pause(self.get_random_seconds())
 
             # 已修正误差的和
             fixedOffsetX = 0
@@ -131,11 +131,11 @@ class BilibiliLogin(object):
 
             fixedOffsetX += offsetx
             action_chains.move_by_offset(-offsetx, 0)
-            action_chains.pause(self.getRandomPauseSeconds())
+            action_chains.pause(self.get_random_seconds())
 
             # 最后一次修正误差
             action_chains.move_by_offset(-sumOffsetx + fixedOffsetX, 0)
-            action_chains.pause(self.getRandomPauseSeconds())
+            action_chains.pause(self.get_random_seconds())
 
         else:
             raise Exception("莫不是系统出现了问题？!")
@@ -173,7 +173,7 @@ class BilibiliLogin(object):
         slider = self.wait.until(
             EC.presence_of_element_located((By.CLASS_NAME, 'geetest_slider_button'))
         )
-        self.simulateDragX(slider, gap)
+        self.drag_slider(slider, gap)
 
         if self.login_success():
             print('登录成功')

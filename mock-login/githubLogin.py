@@ -26,13 +26,8 @@ class GithubLogin(object):
         authenticity_token, timestamp, timestamp_secret = self.get_params()
         data = {
             "authenticity_token": authenticity_token,
-            "ga_id": "",
             "login": USER_NAME_GH,
             "password": PASSWORD_GH,
-            "webauthn-support": "unknown",
-            "webauthn-iuvpaa-support": "unknown",
-            "return_to": "",
-            "required_field_7d22": "",
             "timestamp": timestamp,
             "timestamp_secret": timestamp_secret,
             "commit": "Sign in"
