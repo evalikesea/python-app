@@ -1,0 +1,27 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+<div class="profile">
+    <div class="info-section">
+        <div class="info-title">Account Info</div>
+        <ul >
+            <li><span>Username:</span>{{ profile.user.username }}</li>
+            <li><span>Email: </span>{{ profile.user.email }}</li>
+        </ul>
+    </div>
+    <div class="info-section">
+        <div class="info-title">My Profile</div>
+        <ul>
+            <li><span>First Name:</span>{{ profile.user.first_name }}</li>
+            <li><span>Last Name: </span>{{ profile.user.last_name }}</li>
+            <li><span>Telephone: </span>{{ profile.telephone }}</li>
+            <li><span>Organization:</span>{{ profile.org }}</li>
+        </ul>
+    </div>
+    <div class="btn-list">
+        <a class="btn btn-outline-primary" href="{% url 'users:profile_update' profile.user.id  %}">Edit Profile</a>
+        <a class="btn btn-outline-primary" href="{% url 'users:pwd_change' profile.user.id  %}">Change Password</a>
+    </div>
+</div>
+
+{% endblock %}

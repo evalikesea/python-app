@@ -1,0 +1,33 @@
+{% extends "users/base.html" %}
+{% block content %}
+{% if message %}
+<div class="alert alert-danger" role="alert">{{ message }}</div>
+{% endif %}
+<div class="login">
+    <div class="form-wrapper">
+        <div class="title">Login</div>
+        <form method="post" action="" enctype="multipart/form-data">
+           {% csrf_token %}
+           {% for field in form %}
+                <div class="form-group">
+                    {% if field.errors %}
+                    <div class="alert alert-danger" role="alert">{{ field.errors }}</div>
+                    {% endif %}
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.help_text %}
+                     <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+           {% endfor %}
+           <div class="btn-list">
+               <div class="btn-item">
+                   <input class="btn btn-primary" type="submit" value="Login">
+               </div>
+               <div class="btn-item">
+                   <a class="btn btn-outline-primary" href="/accounts/register">Register</a>
+               </div>
+           </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "users/base.html" %}
+{% block content %}
+<div class="info-title">
+  <div style="display:inline-block;">{{ dish.name }}</div>
+  {% if request.user == dish.user %}
+  <a href="{% url 'myrestaurants:dish_edit' dish.restaurant.id dish.id%}"><i class="icon-edit"></i></a>
+  {% endif %}
+</div>
+<div class="info-list">
+  <div class="info-item">餐厅:
+    <a href="{% url 'myrestaurants:restaurant_detail' dish.restaurant.id %}">{{ dish.restaurant.name}}</a>
+  </div>
+  <div class="info-item">
+  {{ dish.description }}
+  </div>
+  <div class="info-item">
+  {% if dish.image %}
+  <p><img src="{{ dish.image.url }}"/></p>
+  {% endif %}
+  </div>
+  <div class="info-item">
+    价格: {{ dish.price }}元
+  </div>
+</div>
+
+{% endblock %}

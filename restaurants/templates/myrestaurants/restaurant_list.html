@@ -1,0 +1,22 @@
+{% extends "users/base.html" %}
+{% block content %}
+<div class="info-title">餐厅列表</div>
+<ul class="list-group">
+    {% for restaurant in latest_restaurant_list %}
+    <li class="list-group-item"><a href="{% url 'myrestaurants:restaurant_detail' restaurant.id %}">
+        {{ restaurant.name}}
+    </a></li>
+    {% empty %}<li>对不起，目前还没有餐厅</li>
+    {% endfor %}
+</ul>
+
+{% if request.user.is_authenticated %}
+<div class="form-group btn-submit" style="margin-top:30px;">
+    <a role="button" class="btn btn-outline-primary" href="{% url 'myrestaurants:restaurant_create'%}">添加餐厅</a>
+</div>
+{% else %}
+<p class="info-item">请<a href="{% url 'users:login' %}?next={% url 'myrestaurants:restaurant_create' %}">登录</a>后添加餐厅</p>
+{% endif %}
+{% endblock%}
+
+

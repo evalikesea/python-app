@@ -1,0 +1,87 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+<div class="restaurant-detail">
+    <div class="info-title">
+        <div style="display:inline-block;">{{ restaurant.name }}</div>
+        {% if request.user == restaurant.user %}
+            <a href="{% url 'myrestaurants:restaurant_edit' restaurant.id %}"><i class="icon-edit"></i></a>
+        {% endif %}
+    </div>
+    <div class="info-list">
+        <div class="info-item">
+            <i class="icon-address"></i>
+            {% if restaurant.address %}
+            {{ restaurant.address }}
+            {% else %}暂时没有地址
+            {% endif %}
+        </div>
+        <div class="info-item">
+            <i class="icon-telephone"></i>
+            {% if restaurant.telephone %}
+            {{ restaurant.telephone }}
+            {% else %}暂时没有电话
+            {% endif %}
+        </div>
+        <div class="info-item">
+            <i class="icon-website"></i>
+           {% if restaurant.url %}
+            {{ restaurant.url }}
+            {% else %}暂时没有网址
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="info-title">菜单
+      {% if request.user.is_authenticated and request.user == restaurant.user %}
+        <a href="{% url 'myrestaurants:dish_create' restaurant.id %}"><i class="icon-add"></i></a>
+      {% endif %}
+    </div>
+
+    <ul>
+        {% for dish in restaurant.dishes.all %}
+        <li class="info-item">
+            <a href="{% url 'myrestaurants:dish_detail' restaurant.id dish.id %}">{{ dish.name }}</a> - {{ dish.price }}元
+        </li>
+        {% empty %}<li class="info-item">对不起，该餐厅还没有菜肴。</li>
+        {% endfor %}
+    </ul>
+
+    <div class="info-title">用户点评</div>
+    {% if restaurant.reviews.all %}
+    <ul>
+        {% for review in restaurant.reviews.all %}
+        <li class="info-item">
+            <p>{{ review.rating}}星, {{ review.user }}点评, {{ review.date | date:"Y-m-d" }}</p>
+            <p>{{ review.comment }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p class="info-item">目前还没有用户点评。</p>
+    {% endif %}
+
+    <div class="info-title">添加点评</div>
+    {% if request.user.is_authenticated %}
+    <form action="{% url 'myrestaurants:review_create' restaurant.id %}" method="post">
+        {% csrf_token %}
+        <p>评论</p>
+        <textarea name="comment" id="comment"></textarea>
+        <p>评分</p>
+        <p>
+        {% for rate in RATING_CHOICES %}
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.0 }}" >
+                <label class="form-check-label" for="choice{{ forloop.counter }}">{{ rate.0 }}星</label>
+            </div>
+        {% endfor %}
+         </p>
+         <div class="form-group btn-submit" style="text-align:left;">
+             <input class="btn btn-primary" type="submit" value="提交"/>
+        </div>
+    </form>
+    {% else %}
+    <p class="info-item">请先<a href="{% url 'users:login' %}?next={% firstof request.path '/' %}">登录</a>再评论。</p>
+    {% endif %}
+</div>
+{% endblock %}

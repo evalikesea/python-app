@@ -1,0 +1,91 @@
+/* CSS RESET start */
+body, html {position: relative;height: 100%;width: 100%;overflow-x: hidden;}
+body{ font-family: Helvetica Neue,Helvetica,Arial,sans-serif;color: #000; font-size: 14px; overflow: hidden; -webkit-tap-highlight-color:rgba(0,0,0,0);  -webkit-tap-highlight-color: transparent; -webkit-user-select:none; -moz-user-select:none; user-select: none;-webkit-touch-callout: none;}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section,i { margin: 0; padding: 0; box-sizing: border-box;-webkit-box-sizing: border-box;}
+input {line-height: normal;border: none;outline: 0; -webkit-box-shadow: none; -moz-box-shoadow: none; -o-box-shadow: none; box-shadow: none; -webkit-user-modify: read-write-plaintext-only; -webkit-tap-highlight-color:rgba(0,0,0,0);}
+input[type="text"] { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+fieldset, img { border: 0; }
+a:hover, a:active { text-decoration: none; }
+ins, a { text-decoration: none; }
+button { overflow: visible; border: 0 none; background-color: transparent; }
+button::-moz-focus-inner, input::-moz-focus-inner { padding: 0; border: 0; }
+textarea, input { background: none; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; -webkit-appearance: none; }
+textarea:focus, input:focus{ -webkit-user-modify: read-write-plaintext-only;}
+input[type=password] { -webkit-text-security: disc; }
+textarea:focus, input:focus, button:focus { outline: none; }
+li{list-style: none;}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #a6a6a6;
+}
+
+/*******************bg********************/
+.bg-orange{
+    background-color: #EE8166;
+}
+.icon-home{
+    position: static;
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    background:url(../img/icon_home.png);
+    background-size: 40px 40px;
+}
+.icon-user{
+    position: static;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    background:url(../img/icon_user.svg);
+    background-size: 30px 30px;
+}
+.icon-add:before{
+    content: '+';
+    position: relative;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    font-size:50px;
+    font-weight:300;
+    color: #8a8a8a;
+}
+
+.icon-edit{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    background:url(../img/icon_edit.svg) center center no-repeat;
+    background-size: 30px 30px;
+    top:-3px;
+}
+
+.icon-address{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    background:url(../img/icon_address.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon-telephone{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    background:url(../img/icon_phone.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
+.icon-website{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    background:url(../img/icon_website.svg) center center no-repeat;
+    background-size: 20px 20px;
+}
