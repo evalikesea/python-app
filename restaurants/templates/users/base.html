@@ -14,7 +14,7 @@
     {% block header %}
     {% endblock %}
 </head>
-<body>
+<body style="overflow:scroll;">
 <nav class="navbar navbar-expand-lg navbar-light bg-orange nav-base">
     <a class="navbar-brand" href="{% url 'myrestaurants:restaurant_list' %}">
         <i class="icon icon-home"></i>
@@ -45,15 +45,13 @@
         </div>
     </div>
 </nav>
-<main id="section1" class="container-fluid">
+<main >
     <div class="container">
-        <div class="row">
-             <div class="base">
-              {% block content %}
-              {% if error_message %}<p><strong>{{ error_message}}</strong></p>{% endif %}
-              {% endblock %}
-             </div>
-        </div>
+         <div class="base">
+          {% block content %}
+          {% if error_message %}<p><strong>{{ error_message}}</strong></p>{% endif %}
+          {% endblock %}
+         </div>
     </div>
 </main>
 <footer class="footer">

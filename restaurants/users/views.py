@@ -5,9 +5,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from .models import UserProfile
 from django.contrib import auth
-from django.contrib.auth import logout
-from django.views.generic import UpdateView
-from django.views.decorators.cache import never_cache
 from .forms import RegistrationForm, LoginForm, ProfileForm, PwdChangeForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
